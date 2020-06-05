@@ -131,8 +131,14 @@ combination["TTH"]=$TTH_percent
 combination["HTT"]=$HTT_percent
 combination["THT"]=$THT_percent
 
+max=0
 for key in ${!combination[@]}
 do
         echo "$key : ${combination[$key]} %"
+        if [ 1 -eq "$(echo "${combination[$key]} > ${max}" | bc)" ]
+        then
+                max=${combination[$key]}
+                maxComb=$key
+        fi
 done
-
+echo "The winning combination is $maxComb by $max %"
